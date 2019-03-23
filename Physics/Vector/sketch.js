@@ -14,11 +14,11 @@ function setup() {
         this.radius = radius;
         this.location = location;
         this.velocity = velocity;
-        this.drawBall = drawBall;
-        this.moveBall = moveBall;
-        this.checkBounce = checkBounce;
-        this.checkCollision = checkCollision;
     }
+    Ball.prototype.drawBall = drawBall;
+    Ball.prototype.moveBall = moveBall;
+    Ball.prototype.checkBounce = checkBounce;
+    Ball.prototype.checkCollision = checkCollision;
 
     function drawBall() {
         stroke(255, 239, 150);
@@ -41,9 +41,8 @@ function setup() {
     }
 
     function checkCollision() {
-        //Simple collision
         for (let ball of balls) {
-            if(ball === this) continue;           
+            if (ball === this) continue;
             const distance = this.location.copy().sub(ball.location).mag();
             if (distance <= (this.radius + ball.radius)) {
                 this.velocity.mult(-1);
@@ -59,6 +58,6 @@ function draw() {
         ball.checkCollision();
         ball.checkBounce();
         ball.moveBall();
-        ball.drawBall();        
+        ball.drawBall();
     }
 }
