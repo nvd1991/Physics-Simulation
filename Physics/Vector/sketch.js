@@ -3,17 +3,18 @@ let balls;
 function setup() {
     createCanvas(400, 400);
     balls = [
-        new Ball(10, createVector(50, 70), createVector(2.5, -2)),
-        new Ball(20, createVector(233, 300), createVector(1.5, 1)),
-        new Ball(15, createVector(200, 200), createVector(4.5, -5)),
-        new Ball(30, createVector(35, 269), createVector(1, -2)),
-        new Ball(10, createVector(100, 200), createVector(3, 2.5)),
+        new Ball(10, createVector(50, 70), createVector(2.5, -2), createVector(0, 0)),
+        new Ball(20, createVector(233, 300), createVector(1.5, 1),createVector(0, 0)),
+        new Ball(15, createVector(200, 200), createVector(4.5, -5), createVector(0, 0)),
+        new Ball(30, createVector(35, 269), createVector(1, -2), createVector(0, 0)),
+        new Ball(10, createVector(100, 200), createVector(3, 2.5), createVector(0, 0)),
     ];
 
-    function Ball(radius, location, velocity) {
+    function Ball(radius, location, velocity, acceleration) {
         this.radius = radius;
         this.location = location;
         this.velocity = velocity;
+        this.acceleration = acceleration;
     }
     Ball.prototype.drawBall = drawBall;
     Ball.prototype.moveBall = moveBall;
@@ -28,6 +29,8 @@ function setup() {
     }
 
     function moveBall() {
+        this.acceleration = createVector(mouseX, mouseY).sub(this.location).normalize().mult(0.1);
+        this.velocity.add(this.acceleration);
         this.location.add(this.velocity);
     }
 
