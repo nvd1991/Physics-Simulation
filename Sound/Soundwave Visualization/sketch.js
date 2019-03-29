@@ -1,8 +1,10 @@
 let song, sliderVolume, amplitude, colWidth, img, myFont;
 let sizeLog = [];
+const canvasWidth = document.documentElement.clientWidth;
+const canvasHeight = document.documentElement.clientHeight;
 const gap = 60;
-const radius = 150;
-const innerRadius = 120;
+const radius = Math.round(canvasHeight / 5);
+const innerRadius = Math.round(radius * 0.8);
 const maxLog = 40;
 const fRate = 10;
 const sizeStart = -10;
@@ -17,7 +19,7 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(1000, 600);
+    createCanvas(canvasWidth, canvasHeight);
     colWidth = width / maxLog;
     amplitude = new p5.Amplitude();    
     angleMode(DEGREES);
@@ -29,7 +31,7 @@ function setup() {
 }
 
 function draw() {    
-    image(img, 0, 0, 1000, 600);
+    image(img, 0, 0, canvasWidth, canvasHeight);
 
     const size = getSize();
     setupContext();
@@ -98,7 +100,7 @@ function drawInnerBar(){
 function drawText(){
     strokeWeight(1.5);
     fill(0, 0, 0, 0);
-    textSize(32);
+    textSize(radius * 0.2);
     textStyle(BOLD);
     textAlign(CENTER, CENTER);
     textFont(myFont);
