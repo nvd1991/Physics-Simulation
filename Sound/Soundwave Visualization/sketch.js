@@ -36,8 +36,7 @@ function draw() {
     drawOuterWave();
     drawBaseArc();
     drawInnerBar();
-
-    
+    drawText();    
 }
 
 function getSize(){
